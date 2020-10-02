@@ -41,7 +41,8 @@ import cookies from 'vue-cookies'
                     console.log(response)
                     this.loginStatus = "SUCCESS"
                     cookies.set('session', response.data.loginToken)
-                    // Send user to home page
+                    cookies.set('userId', response.data.userId)
+                    this.$router.push({name: "profile-page"})
                 }).catch((error) => {
                     // Show use login failure
                     console.log(error)
