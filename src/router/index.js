@@ -4,6 +4,8 @@ import SignUpPage from "../views/SignUp.vue";
 import LoginPage from "../views/Login.vue";
 import ProfilePage from "../views/Profile.vue";
 import EditProfilePage from "../views/EditProfile.vue";
+import DiscoverPage from "../views/Discover.vue";
+import FeedPage from "../views/Feed.vue"
 
 Vue.use(VueRouter);
 
@@ -27,6 +29,16 @@ const routes = [
     path: "/editprofile",
     name: "edit-profile",
     component: EditProfilePage
+  },
+  {
+    path: "/discover",
+    name: "discover-page",
+    component: DiscoverPage
+  },
+  {
+    path: "/feed",
+    name: "feed-page",
+    component: FeedPage
   }
 ];
 
