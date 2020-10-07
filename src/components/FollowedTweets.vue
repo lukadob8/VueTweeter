@@ -1,51 +1,49 @@
 <template>
     <div>
-        <h2 @click="showFeed">Click for Your Feed</h2>
-        <div v-for="user in users" :key="user.userId">
-            <h2> {{ user.username }} </h2>
-            <followed-tweets v-bind:userId="user.userId"> </followed-tweets>
-            <p></p>
+        <div v-for="tweet in tweets" :key="tweet.tweetId">
+            <h4>Tweet:</h4>
+            <p> {{ tweet.content }} </p>
+            <p> {{ tweet.created_at }} </p>
         </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
-import cookies from 'vue-cookies'
-import FollowedTweets from '../components/FollowedTweets.vue'
+
 
     export default {
-        name: "feed-page",
-        components: {
-            FollowedTweets,
+        props: {
+            userId: Number,
         },
+        name: "followed-tweets",
         data() {
             return {
-                users: [],
+                tweets: [],
             }
         },
         methods: {
-            showFeed: function() {
+            showFollowedTweets: function() {
                 axios.request({
                     method: "GET",
-                    url: "https://tweeterest.ml/api/follows",
+                    url: "https://tweeterest.ml/api/tweets",
                     headers: {
                         "Content-Type":"application/json",
                         "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
                     },
                     params: {
-                        userId: cookies.get('userId')
+                        userId: this.userId
                     }
                 }).then((response) => {
+                    this.tweets = response.data
                     console.log(response)
-                    this.users = response.data
                 }).catch((error) => {
                     console.log(error)
                 })
             }
         },
-        props: {
-            
+        mounted () {
+            this.showFollowedTweets();
         },
     }
 </script>

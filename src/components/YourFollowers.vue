@@ -1,10 +1,9 @@
 <template>
     <div>
-        <h2 @click="showFeed">Click for Your Feed</h2>
-        <div v-for="user in users" :key="user.userId">
-            <h2> {{ user.username }} </h2>
-            <followed-tweets v-bind:userId="user.userId"> </followed-tweets>
-            <p></p>
+        <button @click="showFollowers">Your Followers</button>
+        <div v-for="follower in followers" :key="follower.userId">
+            <h4>Username:</h4>
+            <p>{{ follower.username }}</p>
         </div>
     </div>
 </template>
@@ -12,23 +11,19 @@
 <script>
 import axios from 'axios'
 import cookies from 'vue-cookies'
-import FollowedTweets from '../components/FollowedTweets.vue'
 
     export default {
-        name: "feed-page",
-        components: {
-            FollowedTweets,
-        },
+        name: "your-followers",
         data() {
             return {
-                users: [],
+                followers: []
             }
         },
         methods: {
-            showFeed: function() {
+            showFollowers: function() {
                 axios.request({
                     method: "GET",
-                    url: "https://tweeterest.ml/api/follows",
+                    url: "https://tweeterest.ml/api/followers",
                     headers: {
                         "Content-Type":"application/json",
                         "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
@@ -38,14 +33,11 @@ import FollowedTweets from '../components/FollowedTweets.vue'
                     }
                 }).then((response) => {
                     console.log(response)
-                    this.users = response.data
+                    this.followers = response.data
                 }).catch((error) => {
                     console.log(error)
                 })
             }
-        },
-        props: {
-            
         },
     }
 </script>

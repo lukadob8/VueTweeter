@@ -48,7 +48,7 @@ import cookies from 'vue-cookies'
                     }
                 }).then((response) => {
                     console.log(response)
-                    cookies.set('session', response.data[0].loginToken)
+                    cookies.set('session', response.data.loginToken)
                 }).catch((error) => {
                     console.log(error)
                 })

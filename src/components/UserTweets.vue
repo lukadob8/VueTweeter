@@ -1,25 +1,36 @@
 <template>
     <div>
-        <h2 @click="showUserTweets">Show Tweets</h2>
-        <div v-for="tweet in tweets" :key="tweet.tweetId">
-            <p> {{ tweet.content }} </p>
-            <p @click="editing = tweet.tweetId">Edit</p>
-            <p>Delete</p>
-            <div v-if="editing == tweet.tweetId">
+        <!-- <h2 @click="showUserTweets">Show Tweets</h2> -->
+        <!-- <div v-for="tweet in tweets" :key="tweet.tweetId"> -->
+            <display-user-tweets v-bind:tweets="tweets"> </display-user-tweets>
+            <!-- <p> {{ tweet.content }} </p> -->
+            <!-- <button @click="editing = tweet.tweetId">Edit</button> -->
+            <!-- <button @click="deleteTweet(tweet.tweetId)">Delete</button> -->
+            <!-- <comments v-bind:tweetId="tweet.tweetId"> </comments>
+            <tweet-likes v-bind:tweetId="tweet.tweetId"> </tweet-likes> -->
+            <!-- <div v-if="editing == tweet.tweetId">
                 <textarea id="newTweet" v-model="newTweet"></textarea>
                 <p @click="editTweets(tweet.tweetId)">Post Edit</p>
             </div>
-            <br>
-        </div>
+            <br> -->
+        <!-- </div> -->
     </div>
 </template>
 
 <script>
 import axios from "axios"
 import cookies from "vue-cookies"
+// import Comments from "../components/Comments.vue"
+// import TweetLikes from "../components/TweetLikes.vue"
+import DisplayUserTweets from "../components/DisplayUserTweets.vue"
 
     export default {
         name: "user-tweets",
+        components: {
+            // Comments,
+            // TweetLikes,
+            DisplayUserTweets,
+        },
         data() {
             return {
                 tweets: [],
@@ -29,7 +40,7 @@ import cookies from "vue-cookies"
         },
         
         methods: {
-            showUserTweets: function() {
+            getUserTweets: function() {
                 axios.request({
                     method: "GET",
                     url: "https://tweeterest.ml/api/tweets",
@@ -47,38 +58,56 @@ import cookies from "vue-cookies"
                     console.log(error)
                 })
             },
-            editTweets: function(tweetId) {
-                for(let i = 0; i < this.tweets.length; i++) {
-                    console.log(this.tweets[i].tweetId)
-                }
-                this.editing = -1,
-                axios.request({
-                    method: "PATCH",
-                    url: "https://tweeterest.ml/api/tweets",
-                    headers: {
-                        "Content-Type":"application/json",
-                        "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
-                    },
-                    data: {
-                        loginToken: cookies.get('session'),
-                        tweetId: tweetId,
-                        content: this.newTweet
-                    },
+            // editTweets: function(tweetId) {
+            //     for(let i = 0; i < this.tweets.length; i++) {
+            //         console.log(this.tweets[i].tweetId)
+            //     }
+            //     this.editing = -1,
+            //     axios.request({
+            //         method: "PATCH",
+            //         url: "https://tweeterest.ml/api/tweets",
+            //         headers: {
+            //             "Content-Type":"application/json",
+            //             "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
+            //         },
+            //         data: {
+            //             loginToken: cookies.get('session'),
+            //             tweetId: tweetId,
+            //             content: this.newTweet
+            //         },
                     
-                }).then((response) => {
-                    for(let i = 0; i < this.tweets.length; i++) {
-                    if(this.tweets[i].tweetId == tweetId) {
-                        this.tweets[i].content = this.newTweet
-                    }
-                }
-                    console.log(response)
-                }).catch((error) => {
-                    console.log(error)
-                })
-            },
+            //     }).then((response) => {
+            //         console.log(response)
+            //     }).catch((error) => {
+            //         console.log(error)
+            //     })
+            // },
+            // deleteTweet: function(tweetId) {
+            //     axios.request({
+            //         method: "DELETE",
+            //         url: "https://tweeterest.ml/api/tweets",
+            //         headers: {
+            //             "Content-Type":"application/json",
+            //             "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
+            //         },
+            //         data: {
+            //             loginToken: cookies.get('session'),
+            //             tweetId: tweetId
+            //         }
+            //     }).then((response) => {
+            //         console.log(response)
+                    
+                    
+            //     }).catch((error) => {
+            //         console.log(error)
+            //     })
+            // }
 
             
-        }
+        },
+        mounted () {
+            this.getUserTweets();
+        },
     }
 </script>
 
