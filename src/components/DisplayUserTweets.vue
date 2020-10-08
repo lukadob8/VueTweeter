@@ -4,8 +4,8 @@
             <h3>Tweet:</h3>
             <p>{{ tweet.content }}</p>
             <p>{{ tweet.createdAt }}</p>
-            <comments vbind:tweetId="tweet.tweetId"> </comments>
-            <tweet-likes vbind:tweetId="tweet.tweetId"> </tweet-likes>
+            <comments v-bind:tweetId="tweet.tweetId"> </comments>
+            <tweet-likes v-bind:tweetId="tweet.tweetId"> </tweet-likes>
             <edit-user-tweets> </edit-user-tweets>
             <delete-user-tweets> </delete-user-tweets>
 

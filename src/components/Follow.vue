@@ -12,9 +12,11 @@ import cookies from 'vue-cookies'
         name: "follow",
         data() {
             return {
-                userId: Number,
                 isFollowed: false,
             }
+        },
+        props: {
+            userId: Number,
         },
         methods: {
             followUser: function() {
