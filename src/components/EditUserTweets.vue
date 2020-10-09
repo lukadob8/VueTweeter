@@ -1,6 +1,10 @@
 <template>
     <div>
-         <button @click="editing = tweet.tweetId">Edit</button>
+         <button @click="editing = this.tweetId">Edit</button>
+         <div v-if="editing == this.tweetId">
+                <textarea id="newTweet" v-model="newTweet"></textarea>
+                <p @click="editTweets()">Post Edit</p>
+            </div>
     </div>
 </template>
 
@@ -10,8 +14,17 @@ import cookies from 'vue-cookies'
 
     export default {
         name: "edit-user-tweets",
+        props: {
+            tweetId: Number,
+        },
+        data() {
+            return {
+                newTweet: "",
+                editing: -1,
+            }
+        },
         methods: {
-            editTweets: function(tweetId) {
+            editTweets: function() {
                 for(let i = 0; i < this.tweets.length; i++) {
                     console.log(this.tweets[i].tweetId)
                 }
@@ -25,7 +38,7 @@ import cookies from 'vue-cookies'
                     },
                     data: {
                         loginToken: cookies.get('session'),
-                        tweetId: tweetId,
+                        tweetId: this.tweetId,
                         content: this.newTweet
                     },
                     

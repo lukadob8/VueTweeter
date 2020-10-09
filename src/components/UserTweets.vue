@@ -11,8 +11,8 @@
             <!-- <div v-if="editing == tweet.tweetId">
                 <textarea id="newTweet" v-model="newTweet"></textarea>
                 <p @click="editTweets(tweet.tweetId)">Post Edit</p>
-            </div>
-            <br> -->
+            </div> -->
+       
         <!-- </div> -->
     </div>
 </template>

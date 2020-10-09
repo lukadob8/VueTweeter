@@ -13,6 +13,7 @@ import cookies from 'vue-cookies'
         data() {
             return {
                 isFollowed: false,
+                usersFollowed: [],
             }
         },
         props: {
@@ -57,6 +58,32 @@ import cookies from 'vue-cookies'
                     console.log(error)
                 })
             },
+            checkForFollow: function() {
+                axios.request({
+                    method: "GET",
+                    url: "https://tweeterest.ml/api/follows",
+                    headers: {
+                        "Content-Type":"application/json",
+                        "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
+                    },
+                    params: {
+                        userId: cookies.get('userId')
+                    }
+                }).then((response) => {
+                    this.usersFollowed = response.data
+                    
+                    for(let i = 0; i < this.usersFollowed.length; i++) {
+                        if(this.userId == this.usersFollowed[i].userId) {
+                            this.isFollowed = true
+                        }
+                    }
+                }).catch((error) => {
+                    console.log(error)
+                })
+            }
+        },
+        mounted () {
+            this.checkForFollow();
         },
     }
 </script>

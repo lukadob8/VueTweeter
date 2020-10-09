@@ -1,7 +1,7 @@
 <template>
     <div>
-        <button @click="likeTweet" v-if="isLiked == false">Like</button>
-        <button @click="unlikeTweet" v-else-if="isLiked == true">Unlike</button>
+        <button @click="likeComment()" v-if="isLiked == false">Like</button>
+        <button @click="unlikeComment()" v-if="isLiked == true">Unlike</button>
     </div>
 </template>
 
@@ -10,29 +10,29 @@ import axios from 'axios'
 import cookies from 'vue-cookies'
 
     export default {
-        name: "tweet-likes",
+        name: "comment-likes",
         props: {
-            tweetId: Number,
+            commentId: Number,
         },
         data() {
             return {
                 isLiked: false,
-                tweetsLiked: [],
+                commentsLiked: [],
             }
         },
         methods: {
-            likeTweet: function() {
-                this.isLiked = true,
+            likeComment: function() {
+                this.isLiked = true
                 axios.request({
                     method: "POST",
-                    url: "https://tweeterest.ml/api/tweet-likes",
+                    url: "https://tweeterest.ml/api/comment-likes",
                     headers: {
                         "Content-Type":"application/json",
                         "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
                     },
                     data: {
                         loginToken: cookies.get('session'),
-                        tweetId: this.tweetId
+                        commentId: this.commentId
                     }
                 }).then((response) => {
                     console.log(response)
@@ -40,18 +40,18 @@ import cookies from 'vue-cookies'
                     console.log(error)
                 })
             },
-            unlikeTweet: function() {
-                this.isLiked = false,
+            unlikeComment: function() {
+                this.isLiked = false
                 axios.request({
                     method: "DELETE",
-                    url: "https://tweeterest.ml/api/tweet-likes",
+                    url: "https://tweeterest.ml/api/comment-likes",
                     headers: {
                         "Content-Type":"application/json",
                         "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
                     },
                     data: {
                         loginToken: cookies.get('session'),
-                        tweetId: this.tweetId
+                        commentId: this.commentId
                     }
                 }).then((response) => {
                     console.log(response)
@@ -59,29 +59,22 @@ import cookies from 'vue-cookies'
                     console.log(error)
                 })
             },
-            getTweetLikes: function() {
+            checkForLikes: function() {
                 axios.request({
                     method: "GET",
-                    url: "https://tweeterest.ml/api/tweet-likes",
+                    url: "https://tweeterest.ml/api/comment-likes",
                     headers: {
                         "Content-Type":"application/json",
                         "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
                     },
                     params: {
-                        tweetId: this.tweetId
+                        commentId: this.commentId
                     }
-
                 }).then((response) => {
-                    
-                    this.tweetsLiked = response.data
-                    // for(let i = 0; i < this.isLiked.length; i++) {
-                    //     if(cookies.get('userId') = response.data.userId) {
-                    //         this.isLiked = true
-                    //     }
-                    // }
+                    this.commentsLiked = response.data
                     let currentUser = cookies.get('userId')
-                    for(let i = 0; i < this.tweetsLiked.length; i++) {
-                        if(currentUser == this.tweetsLiked[i].userId) {
+                    for(let i = 0; i < this.commentsLiked.length; i++) {
+                        if(currentUser == this.commentsLiked[i].userId) {
                             this.isLiked = true
                             return
                         }
@@ -92,7 +85,7 @@ import cookies from 'vue-cookies'
             }
         },
         mounted () {
-            this.getTweetLikes();
+            this.checkForLikes();
         },
     }
 </script>

@@ -26,6 +26,7 @@ import cookies from 'vue-cookies'
                     console.log(response)
                     this.$router.push({name: "login-page"})
                     cookies.remove('session')
+                    cookies.remove('userId')
                 }).catch((error) => {
                     console.log(error)
                 })

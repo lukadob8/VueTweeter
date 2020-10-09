@@ -1,9 +1,9 @@
 <template>
     <div>
-        <p>Post your thoughts</p>
+        <h2>Post your thoughts</h2>
         <div>
             <textarea id="tweet" v-model="tweet"></textarea>
-            <p @click="makeTweet">Post</p>
+            <button @click="makeTweet">Post</button>
         </div>
     </div>
 </template>

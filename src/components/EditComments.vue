@@ -1,6 +1,10 @@
 <template>
     <div>
-         <button v-if="this.userId == this.LoginId" @click="deleteTweet()">Delete</button>
+        <button v-if="currentUser == userId" @click="editing=true">Edit</button>
+        <div v-if="editing == true">
+            <textarea v-model="newComment"></textarea>
+            <button @click="editComment()">Submit</button>
+        </div>
     </div>
 </template>
 
@@ -9,33 +13,34 @@ import axios from 'axios'
 import cookies from 'vue-cookies'
 
     export default {
-        name: "delete-user-tweets",
+        name: "edit-comments",
         props: {
-            tweetId: Number,
-            LoginId: Number,
+            commentId: Number,
+            userId: Number,
         },
         data() {
             return {
-                userId: cookies.get('userId'),
+                newComment: "",
+                currentUser: cookies.get('userId'),
+                editing: false,
             }
         },
         methods: {
-            deleteTweet: function() {
+            editComment: function() {
                 axios.request({
-                    method: "DELETE",
-                    url: "https://tweeterest.ml/api/tweets",
+                    method: "PATCH",
+                    url: "https://tweeterest.ml/api/comments",
                     headers: {
                         "Content-Type":"application/json",
                         "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
                     },
                     data: {
                         loginToken: cookies.get('session'),
-                        tweetId: this.tweetId
+                        commentId: this.commentId,
+                        content: this.newComment
                     }
                 }).then((response) => {
                     console.log(response)
-                    
-                    
                 }).catch((error) => {
                     console.log(error)
                 })

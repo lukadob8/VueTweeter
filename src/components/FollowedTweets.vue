@@ -4,12 +4,19 @@
             <h4>Tweet:</h4>
             <p> {{ tweet.content }} </p>
             <p> {{ tweet.created_at }} </p>
+            <tweet-likes v-bind:tweetId="tweet.tweetId"> </tweet-likes>
+            <comments v-bind:tweetId="tweet.tweetId"> </comments>
+            <show-comments v-bind:tweetId="tweet.tweetId"> </show-comments>
         </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+//import cookies from 'vue-cookies'
+import Comments from '../components/Comments.vue'
+import ShowComments from '../components/ShowComments.vue'
+import TweetLikes from '../components/TweetLikes.vue'
 
 
     export default {
@@ -21,6 +28,11 @@ import axios from 'axios'
             return {
                 tweets: [],
             }
+        },
+        components: {
+            Comments,
+            ShowComments,
+            TweetLikes,
         },
         methods: {
             showFollowedTweets: function() {

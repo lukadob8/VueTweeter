@@ -6,8 +6,9 @@
             <p>{{ tweet.createdAt }}</p>
             <comments v-bind:tweetId="tweet.tweetId"> </comments>
             <tweet-likes v-bind:tweetId="tweet.tweetId"> </tweet-likes>
-            <edit-user-tweets> </edit-user-tweets>
-            <delete-user-tweets> </delete-user-tweets>
+            <edit-user-tweets v-bind:tweetId="tweet.tweetId"> </edit-user-tweets>
+            <delete-user-tweets v-bind:LoginId="tweet.userId" v-bind:tweetId="tweet.tweetId"> </delete-user-tweets>
+            <show-comments v-bind:tweetId="tweet.tweetId"> </show-comments>
 
         </div>
     </div>
@@ -18,6 +19,7 @@ import Comments from "../components/Comments.vue"
 import TweetLikes from "../components/TweetLikes.vue"
 import EditUserTweets from "../components/EditUserTweets.vue"
 import DeleteUserTweets from "../components/DeleteUserTweets.vue"
+import ShowComments from "../components/ShowComments.vue"
 
     export default {
         name: "display-user-tweets",
@@ -26,6 +28,7 @@ import DeleteUserTweets from "../components/DeleteUserTweets.vue"
             TweetLikes,
             EditUserTweets,
             DeleteUserTweets,
+            ShowComments,
 
         },
         // data() {
