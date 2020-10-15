@@ -1,10 +1,10 @@
 <template>
-    <div v-if="loginToken = loginToken">
-        <router-link to="/editprofile"> Edit Profile </router-link>
-        <br>
-        <router-link to="/discover"> Find Someone to Follow </router-link>
-        <br>
-        <router-link to="/feed"> Your Feed </router-link>
+    <div id="tweets" v-if="loginToken = loginToken">
+        <h2>Welcome {{ username }}</h2>
+        <p>{{ bio }}</p>
+        <header-vue />
+       
+    
         <make-tweets />
         <user-tweets />
         <br>
@@ -20,8 +20,10 @@ import UserTweets from "../components/UserTweets.vue"
 import MakeTweets from "../components/MakeTweets.vue"
 import Logout from "../components/Logout.vue"
 import YourFollowers from "../components/YourFollowers.vue"
+import HeaderVue from "../components/HeaderVue.vue"
 
-// import axios from "axios"
+
+import axios from "axios"
 // import cookies from "vue-cookies"
 
     export default {
@@ -31,15 +33,54 @@ import YourFollowers from "../components/YourFollowers.vue"
             MakeTweets,
             Logout,
             YourFollowers,
+            HeaderVue,
+            
         },
         data() {
             return {
-                loginToken: cookies.get('session')
+                loginToken: cookies.get('session'),
+                username: "",
+                bio: "",
             }
+        },
+        methods: {
+            getUsername: function() {
+                axios.request({
+                    method: "GET",
+                    url: "https://tweeterest.ml/api/users",
+                    headers: {
+                        "Content-Type":"application/json",
+                        "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
+                    },
+                    params: {
+                        userId: cookies.get('userId')
+                    }
+                }).then((response) => {
+                    this.username = response.data[0].username
+                    this.bio = response.data[0].bio
+                }).catch((error) => {
+                    console.log(error)
+                })
+            }
+        },
+        mounted () {
+            this.getUsername();
         },
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+#tweets{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+
+    #header{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        row-gap: 10px;
+    }
+}
 
 </style>

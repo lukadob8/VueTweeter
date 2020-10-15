@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="userPage">
         <!-- <h2 @click="showUserTweets">Show Tweets</h2> -->
         <!-- <div v-for="tweet in tweets" :key="tweet.tweetId"> -->
             <display-user-tweets v-bind:tweets="tweets"> </display-user-tweets>
@@ -52,7 +52,7 @@ import DisplayUserTweets from "../components/DisplayUserTweets.vue"
                         userId: cookies.get('userId')
                     }
                 }).then((response) => {
-                    this.tweets = response.data
+                    this.tweets = response.data.reverse()
                     console.log(response)
                 }).catch((error) => {
                     console.log(error)
@@ -111,6 +111,11 @@ import DisplayUserTweets from "../components/DisplayUserTweets.vue"
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+// #userPage{
+//     display: grid;
+//     justify-items: center;
+//     align-items: center;
+// }
 
 </style>

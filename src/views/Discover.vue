@@ -1,13 +1,14 @@
 <template>
-    <div>
-        <h2 @click="showAllUsers">Show Users</h2>
-        <div v-for="user in users" :key="user.userId">
+    <div id="title">
+        <header-vue />
+        <h2>Discover</h2>
+        <div id="grid">
+            <div id="user" v-for="user in users" :key="user.userId">
             <h2> {{ user.username }} </h2>
             <p> {{ user.bio }} </p>
             <follow v-bind:userId="user.userId"> </follow>
-            <!-- <p @click="followUser(user.userId)" v-if="isFollowed == false">Follow</p>
-            <p @click="unFollow(user.userId)" v-else-if="isFollowed == true">Unfollow</p> -->
             
+        </div>
         </div>
     </div>
 </template>
@@ -16,11 +17,13 @@
 import axios from 'axios'
 // import cookies from 'vue-cookies'
 import Follow from "../components/Follow.vue"
+import HeaderVue from "../components/HeaderVue"
 
     export default {
         name: "discover-page",
         components: {
             Follow,
+            HeaderVue,
         },
         data() {
             return {
@@ -82,10 +85,43 @@ import Follow from "../components/Follow.vue"
             //         console.log(error)
             //     })
             // },
-        }
+        },
+        mounted () {
+            this.showAllUsers();
+        },
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+#title{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+#grid{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    row-gap: 20px;
+
+    #user{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        border: solid lightblue;
+        width: 30vw;
+        padding-bottom: 10px;
+    }
+}
+
+@media only screen and (min-width:600px) {
+    #grid{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 20px;
+    }
+}
 
 </style>

@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div id="button">
         <button v-if="showComments == false" @click="getComments()">Show Comments</button>
         <button v-if="showComments == true" @click="showComments = false">Hide Comments</button>
-        <div v-if="showComments == true">
-            <div v-for="comment in comments" :key="comment.commentId">
+        <div id="grid" v-if="showComments == true">
+            <div id="comment" v-for="comment in comments" :key="comment.commentId">
             <p> {{ comment.content }} </p>
             <comment-likes v-bind:commentId="comment.commentId"> </comment-likes>
             <edit-comments v-bind:commentId="comment.commentId" v-bind:userId="comment.userId"> </edit-comments>
@@ -60,6 +60,22 @@ import DeleteComments from '../components/DeleteComments.vue'
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+#button{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+#grid{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+
+    #comment{
+         display: grid;
+        align-items: center;
+        justify-items: center;
+    }
+}
 
 </style>

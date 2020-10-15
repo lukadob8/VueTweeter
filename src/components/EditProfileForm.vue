@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <div>
+    <div id="page">
+        <header-vue />
+        <div id="grid">
             <p>Email</p>
         <input type="text" id="email-input" v-model="email">
         <p>UserName</p>
@@ -11,7 +12,8 @@
         <textarea id="bio-input" v-model="bio"></textarea>
         <p>Birthday</p>
         <input type="text" id="birthday-input" v-model="birthday">
-        <h2 @click="updateProfile">Update Profile</h2>
+        <br>
+        <button @click="updateProfile">Update Profile</button>
         </div>
     </div>
 </template>
@@ -19,6 +21,7 @@
 <script>
 import axios from "axios"
 import cookies from "vue-cookies"
+import HeaderVue from "../components/HeaderVue"
 
     export default {
         name: "edit-profile",
@@ -30,6 +33,9 @@ import cookies from "vue-cookies"
                 bio: "",
                 birthday: ""
             }
+        },
+        components: {
+            HeaderVue,
         },
         methods: {
             updateProfile: function() {
@@ -58,6 +64,16 @@ import cookies from "vue-cookies"
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+#page{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+#grid{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
 
 </style>

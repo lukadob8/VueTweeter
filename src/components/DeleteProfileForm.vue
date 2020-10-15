@@ -1,8 +1,9 @@
 <template>
-    <div>
+    <div id="grid">
         <p>To delete your account please confirm your password to continue</p>
         <input type="password" v-model="password" id="passwordInput">
-        <p @click="deleteProfile">Delete Account</p>
+        <br>
+        <button @click="deleteProfile">Delete Account</button>
     </div>
 </template>
 
@@ -43,6 +44,11 @@ import cookies from "vue-cookies"
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+#grid{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
 
 </style>

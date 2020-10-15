@@ -1,5 +1,6 @@
 <template>
     <div>
+        <p>Likes {{ numLikes }}</p>
         <button @click="likeComment()" v-if="isLiked == false">Like</button>
         <button @click="unlikeComment()" v-if="isLiked == true">Unlike</button>
     </div>
@@ -18,6 +19,7 @@ import cookies from 'vue-cookies'
             return {
                 isLiked: false,
                 commentsLiked: [],
+                numLikes: 0,
             }
         },
         methods: {
@@ -35,6 +37,7 @@ import cookies from 'vue-cookies'
                         commentId: this.commentId
                     }
                 }).then((response) => {
+                    this.numLikes++
                     console.log(response)
                 }).catch((error) => {
                     console.log(error)
@@ -54,6 +57,7 @@ import cookies from 'vue-cookies'
                         commentId: this.commentId
                     }
                 }).then((response) => {
+                    this.numLikes--
                     console.log(response)
                 }).catch((error) => {
                     console.log(error)
@@ -72,6 +76,8 @@ import cookies from 'vue-cookies'
                     }
                 }).then((response) => {
                     this.commentsLiked = response.data
+                    this.numLikes = this.commentsLiked.length
+
                     let currentUser = cookies.get('userId')
                     for(let i = 0; i < this.commentsLiked.length; i++) {
                         if(currentUser == this.commentsLiked[i].userId) {

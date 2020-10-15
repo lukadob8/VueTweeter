@@ -1,12 +1,15 @@
 <template>
-    <div>
-        <h1>THIS IS THE LOGIN</h1>
+    <div id="login">
+        <!-- <img src="@/assets/TweeterLogo.png" alt="Tweeter Logo"> -->
+        <h1>Login</h1>
         <p>Email</p>
         <input type="text" id="email-input" v-model="email">
         <p>Password</p>
         <input type="password" id="password-input" v-model="password">
-        <h2 @click="loginUser">Login</h2>
+        <br><br>
+        <button @click="loginUser">Login</button>
         <h3>{{ loginStatus }}</h3>
+                  <router-link to="/signup"> Sign Up </router-link>
     </div>
 </template>
 
@@ -53,6 +56,15 @@ import cookies from 'vue-cookies'
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+    #login{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+
+        
+
+        
+    }
 
 </style>

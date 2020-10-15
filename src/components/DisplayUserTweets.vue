@@ -1,8 +1,9 @@
 <template>
-    <div>
-        <div v-for="tweet in tweets" :key="tweet.tweetId">
+    <div id="tweet">
+        <div id="display" v-for="tweet in tweets" :key="tweet.tweetId">
             <h3>Tweet:</h3>
             <p>{{ tweet.content }}</p>
+            <h5>Created On:</h5>
             <p>{{ tweet.createdAt }}</p>
             <comments v-bind:tweetId="tweet.tweetId"> </comments>
             <tweet-likes v-bind:tweetId="tweet.tweetId"> </tweet-likes>
@@ -46,6 +47,33 @@ import ShowComments from "../components/ShowComments.vue"
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+#tweet{
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    row-gap: 20px;
+
+    #display{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        width: 40vw;
+        border: solid lightblue;
+        padding-bottom: 10px;
+        
+        
+    }
+}
+
+@media only screen and (min-width:600px) {
+    #tweet{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 20px;
+    }
+}
 
 </style>

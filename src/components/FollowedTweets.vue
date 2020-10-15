@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div v-for="tweet in tweets" :key="tweet.tweetId">
+    <div id="grid">
+        <div id="tweets" v-for="tweet in tweets" :key="tweet.tweetId">
             <h4>Tweet:</h4>
             <p> {{ tweet.content }} </p>
             <p> {{ tweet.created_at }} </p>
@@ -47,7 +47,7 @@ import TweetLikes from '../components/TweetLikes.vue'
                         userId: this.userId
                     }
                 }).then((response) => {
-                    this.tweets = response.data
+                    this.tweets = response.data.reverse()
                     console.log(response)
                 }).catch((error) => {
                     console.log(error)
@@ -60,6 +60,16 @@ import TweetLikes from '../components/TweetLikes.vue'
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+
+
+#tweets{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    width: 40vw;
+    border: solid lightblue;
+
+}
 
 </style>

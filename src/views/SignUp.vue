@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <router-link to="/login"> Login </router-link>
-        <h1>Sign Up Page</h1>
+    <div id="signup">
+        
+        
         <signup-form />
     </div>
 </template>
@@ -16,6 +16,6 @@ import SignupForm from '../components/SignupForm.vue'
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 
 </style>

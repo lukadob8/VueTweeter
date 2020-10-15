@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div id="grid">
+        <p>Likes {{ likesNum }}</p>
         <button @click="likeTweet" v-if="isLiked == false">Like</button>
         <button @click="unlikeTweet" v-else-if="isLiked == true">Unlike</button>
     </div>
@@ -18,6 +19,7 @@ import cookies from 'vue-cookies'
             return {
                 isLiked: false,
                 tweetsLiked: [],
+                likesNum: 0,
             }
         },
         methods: {
@@ -35,6 +37,7 @@ import cookies from 'vue-cookies'
                         tweetId: this.tweetId
                     }
                 }).then((response) => {
+                    this.likesNum++
                     console.log(response)
                 }).catch((error) => {
                     console.log(error)
@@ -54,6 +57,7 @@ import cookies from 'vue-cookies'
                         tweetId: this.tweetId
                     }
                 }).then((response) => {
+                    this.likesNum--
                     console.log(response)
                 }).catch((error) => {
                     console.log(error)
@@ -74,11 +78,8 @@ import cookies from 'vue-cookies'
                 }).then((response) => {
                     
                     this.tweetsLiked = response.data
-                    // for(let i = 0; i < this.isLiked.length; i++) {
-                    //     if(cookies.get('userId') = response.data.userId) {
-                    //         this.isLiked = true
-                    //     }
-                    // }
+                    this.likesNum = this.tweetsLiked.length
+                   
                     let currentUser = cookies.get('userId')
                     for(let i = 0; i < this.tweetsLiked.length; i++) {
                         if(currentUser == this.tweetsLiked[i].userId) {
@@ -97,6 +98,11 @@ import cookies from 'vue-cookies'
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+#grid{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
 
 </style>

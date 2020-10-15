@@ -1,10 +1,11 @@
 <template>
-    <div>
-        <h2 @click="showFeed">Click for Your Feed</h2>
-        <div v-for="user in users" :key="user.userId">
-            <h2> {{ user.username }} </h2>
+    <div id="title">
+        <header-vue> </header-vue>
+        <!-- <button @click="showFeed">Click for Your Feed</button> -->
+        <div id="tweets" v-for="user in users" :key="user.userId">
+            <h2> Username {{ user.username }} </h2>
             <followed-tweets v-bind:userId="user.userId"> </followed-tweets>
-            <p></p>
+           
         </div>
     </div>
 </template>
@@ -13,11 +14,13 @@
 import axios from 'axios'
 import cookies from 'vue-cookies'
 import FollowedTweets from '../components/FollowedTweets.vue'
+import HeaderVue from '../components/HeaderVue.vue'
 
     export default {
         name: "feed-page",
         components: {
             FollowedTweets,
+            HeaderVue,
         },
         data() {
             return {
@@ -44,12 +47,30 @@ import FollowedTweets from '../components/FollowedTweets.vue'
                 })
             }
         },
-        props: {
-            
+        mounted () {
+            this.showFeed();
         },
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+#title{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    
+    
+    
+
+    #tweet{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        border-bottom: solid;
+       
+        
+        
+    }
+}
 
 </style>

@@ -1,9 +1,9 @@
 <template>
     <div>
-         <button @click="editing = this.tweetId">Edit</button>
-         <div v-if="editing == this.tweetId">
+         <button @click="editing = tweetId">Edit</button>
+         <div v-if="editing == tweetId">
                 <textarea id="newTweet" v-model="newTweet"></textarea>
-                <p @click="editTweets()">Post Edit</p>
+                <button @click="editTweets()">Post Edit</button>
             </div>
     </div>
 </template>
@@ -25,9 +25,6 @@ import cookies from 'vue-cookies'
         },
         methods: {
             editTweets: function() {
-                for(let i = 0; i < this.tweets.length; i++) {
-                    console.log(this.tweets[i].tweetId)
-                }
                 this.editing = -1,
                 axios.request({
                     method: "PATCH",
@@ -44,6 +41,7 @@ import cookies from 'vue-cookies'
                     
                 }).then((response) => {
                     console.log(response)
+                    window.location.reload()
                 }).catch((error) => {
                     console.log(error)
                 })

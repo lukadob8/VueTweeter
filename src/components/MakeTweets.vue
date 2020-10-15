@@ -1,9 +1,11 @@
 <template>
     <div>
         <h2>Post your thoughts</h2>
-        <div>
+        <div id="postTweet">
             <textarea id="tweet" v-model="tweet"></textarea>
+            <br><br>
             <button @click="makeTweet">Post</button>
+            <br><br>
         </div>
     </div>
 </template>
@@ -35,6 +37,7 @@ import cookies from 'vue-cookies'
                 }).then((response) => {
                     console.log(response)
                     this.tweet = ""
+                    window.location.reload()
                 }).catch((error) => {
                     console.log(error)
                 })
@@ -43,6 +46,11 @@ import cookies from 'vue-cookies'
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+#postTweet{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
 
 </style>

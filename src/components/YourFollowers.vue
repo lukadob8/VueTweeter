@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div id="grid">
         <button @click="showFollowers">Your Followers</button>
-        <div v-for="follower in followers" :key="follower.userId">
+        <div id="follow" v-for="follower in followers" :key="follower.userId">
             <h4>Username:</h4>
             <p>{{ follower.username }}</p>
         </div>
@@ -42,6 +42,21 @@ import cookies from 'vue-cookies'
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+#grid{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    row-gap: 20px;
+
+    #follow{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        border: solid lightblue;
+        padding: 10px;
+       
+    }
+}
 
 </style>

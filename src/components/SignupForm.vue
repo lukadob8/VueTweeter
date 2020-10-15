@@ -1,5 +1,7 @@
 <template>
-    <div>
+    <div id="signup">
+        <!-- <img src="@/assets/TweeterLogo.png" alt="Tweeter Logo"> -->
+        <h1>Sign Up</h1>
         <p>Email</p>
         <input type="text" id="email-input" v-model="email">
         <p>UserName</p>
@@ -10,7 +12,11 @@
         <textarea id="bio-input" v-model="bio"></textarea>
         <p>Birthday</p>
         <input type="text" id="birthday-input" v-model="birthday">
-        <h2 @click="signupUser">Sign Up</h2>
+        <br><br>
+        <button @click="signupUser">Sign Up</button>
+        <br><br>
+        <p>Already have an account?</p>
+        <router-link to="/login"> Login </router-link>
 
     </div>
 </template>
@@ -27,7 +33,7 @@ import cookies from 'vue-cookies'
                 username: "",
                 password: "",
                 bio: "",
-                birthday: ""
+                birthday: "YYYY-MM-DD"
             }
         },
         methods: {
@@ -58,6 +64,13 @@ import cookies from 'vue-cookies'
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+#signup{
+    display: grid;
+    justify-items: center;
+    align-items: center;
+
+    
+}
 
 </style>

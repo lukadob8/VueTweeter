@@ -1,6 +1,7 @@
 <template>
     <div>
-        <p @click="logout">Logout</p>
+        <br><br>
+        <button @click="logout">Logout</button>
     </div>
 </template>
 
