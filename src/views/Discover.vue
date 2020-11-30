@@ -35,11 +35,8 @@ import HeaderVue from "../components/HeaderVue"
             showAllUsers: function() {
                 axios.request({
                     method: "GET",
-                    url: "https://tweeterest.ml/api/users",
-                    headers: {
-                        "Content-Type":"application/json",
-                        "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
-                    },
+                    url: "http://127.0.0.1:5000/api/users",
+                    
                 }).then((response) => {
                     console.log(response)
                     this.users = response.data
@@ -47,44 +44,7 @@ import HeaderVue from "../components/HeaderVue"
                     console.log(error)
                 })
             },
-            // followUser: function(userId) {
-            //     axios.request({
-            //         method: "POST",
-            //         url: "https://tweeterest.ml/api/follows",
-            //         headers: {
-            //             "Content-Type":"application/json",
-            //             "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
-            //         },
-            //         data: {
-            //             loginToken: cookies.get('session'),
-            //             followId: userId
-            //         }
-            //     }).then((response) => {
-            //         this.isFollowed = true
-            //         console.log(response)
-            //     }).catch((error) => {
-            //         console.log(error)
-            //     })
-            // },
-            // unFollow: function(userId) {
-            //     axios.request({
-            //         method: "DELETE",
-            //         url: "https://tweeterest.ml/api/follows",
-            //         headers: {
-            //             "Content-Type":"application/json",
-            //             "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
-            //         },
-            //         data: {
-            //             loginToken: cookies.get('session'),
-            //             followId: userId
-            //         }
-            //     }).then((response) => {
-            //         console.log(response)
-            //         this.isFollowed = false
-            //     }).catch((error) => {
-            //         console.log(error)
-            //     })
-            // },
+           
         },
         mounted () {
             this.showAllUsers();

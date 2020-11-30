@@ -27,11 +27,8 @@ import cookies from 'vue-cookies'
                 this.isLiked = true
                 axios.request({
                     method: "POST",
-                    url: "https://tweeterest.ml/api/comment-likes",
-                    headers: {
-                        "Content-Type":"application/json",
-                        "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
-                    },
+                    url: "http://127.0.0.1:5000/api/comment-likes",
+                    
                     data: {
                         loginToken: cookies.get('session'),
                         commentId: this.commentId
@@ -47,11 +44,8 @@ import cookies from 'vue-cookies'
                 this.isLiked = false
                 axios.request({
                     method: "DELETE",
-                    url: "https://tweeterest.ml/api/comment-likes",
-                    headers: {
-                        "Content-Type":"application/json",
-                        "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
-                    },
+                    url: "http://127.0.0.1:5000/api/comment-likes",
+                    
                     data: {
                         loginToken: cookies.get('session'),
                         commentId: this.commentId
@@ -66,11 +60,8 @@ import cookies from 'vue-cookies'
             checkForLikes: function() {
                 axios.request({
                     method: "GET",
-                    url: "https://tweeterest.ml/api/comment-likes",
-                    headers: {
-                        "Content-Type":"application/json",
-                        "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
-                    },
+                    url: "http://127.0.0.1:5000/api/comment-likes",
+                    
                     params: {
                         commentId: this.commentId
                     }

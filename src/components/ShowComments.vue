@@ -42,11 +42,8 @@ import DeleteComments from '../components/DeleteComments.vue'
                 this.showComments = true
                 axios.request({
                     method: "GET",
-                    url: "https://tweeterest.ml/api/comments",
-                    headers: {
-                        "Content-Type":"application/json",
-                        "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
-                    },
+                    url: "http://127.0.0.1:5000/api/comments",
+                    
                     params: {
                         tweetId: this.tweetId
                     }

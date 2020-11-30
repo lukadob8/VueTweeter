@@ -15,7 +15,7 @@ import cookies from 'vue-cookies'
             logout: function() {
                 axios.request({
                     method: "DELETE",
-                    url: "https://tweeterest.ml/api/login",
+                    url: "http://127.0.0.1:5000/api/login",
                     headers: {
                         "Content-Type":"application/json",
                         "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"

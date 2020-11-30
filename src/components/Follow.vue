@@ -23,7 +23,7 @@ import cookies from 'vue-cookies'
             followUser: function() {
                 axios.request({
                     method: "POST",
-                    url: "https://tweeterest.ml/api/follows",
+                    url: "http://127.0.0.1:5000/api/follows",
                     headers: {
                         "Content-Type":"application/json",
                         "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
@@ -42,7 +42,7 @@ import cookies from 'vue-cookies'
             unFollow: function() {
                 axios.request({
                     method: "DELETE",
-                    url: "https://tweeterest.ml/api/follows",
+                    url: "http://127.0.0.1:5000/api/follows",
                     headers: {
                         "Content-Type":"application/json",
                         "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
@@ -61,7 +61,7 @@ import cookies from 'vue-cookies'
             checkForFollow: function() {
                 axios.request({
                     method: "GET",
-                    url: "https://tweeterest.ml/api/follows",
+                    url: "http://127.0.0.1:5000/api/follows",
                     headers: {
                         "Content-Type":"application/json",
                         "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"

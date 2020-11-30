@@ -38,11 +38,8 @@ import TweetLikes from '../components/TweetLikes.vue'
             showFollowedTweets: function() {
                 axios.request({
                     method: "GET",
-                    url: "https://tweeterest.ml/api/tweets",
-                    headers: {
-                        "Content-Type":"application/json",
-                        "X-Api-Key": "xdW9CWD3P1QVji9QlDLjt4GzSQ4sFcbGuxiCE6r9zD6Vx"
-                    },
+                    url: "http://127.0.0.1:5000/api/tweets",
+                    
                     params: {
                         userId: this.userId
                     }
