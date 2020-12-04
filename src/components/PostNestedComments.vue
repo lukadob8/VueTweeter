@@ -5,7 +5,6 @@
             <textarea id="comment" v-model="commentContent"></textarea>
             <button @click="makeComment">Post Comment</button>
         </div>
-        
     </div>
 </template>
 
@@ -14,9 +13,9 @@ import axios from 'axios'
 import cookies from 'vue-cookies'
 
     export default {
-        name: "comments",
+        name: "post-nested-comments",
         props: {
-            tweetId: Number,
+            commentId: Number,
         },
         data() {
             return {
@@ -31,17 +30,16 @@ import cookies from 'vue-cookies'
             makeComment: function() {
                 axios.request({
                     method: "POST",
-                    url: "http://127.0.0.1:5000/api/comments",
-                    
+                    url: "http://127.0.0.1:5000/api/nested-comments",
                     data: {
                         loginToken: cookies.get('session'),
-                        tweetId: this.tweetId,
+                        commentId: this.commentId,
                         content: this.commentContent
                     }
                 }).then((response) => {
                     console.log(response)
-                    this.commentContent = ""
                     this.isCommenting = false
+                    this.commentContent = ""
                 }).catch((error) => {
                     console.log(error)
                 })

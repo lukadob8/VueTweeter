@@ -5,6 +5,7 @@
         <div id="grid">
             <div id="user" v-for="user in users" :key="user.userId">
             <h2> {{ user.username }} </h2>
+            <popup :username="user.username" :email="user.email" :bio="user.bio" :birthdate="user.birthdate" :userId="user.userId"> </popup>
             <p> {{ user.bio }} </p>
             <follow v-bind:userId="user.userId"> </follow>
             
@@ -18,17 +19,19 @@ import axios from 'axios'
 // import cookies from 'vue-cookies'
 import Follow from "../components/Follow.vue"
 import HeaderVue from "../components/HeaderVue"
+import Popup from "../components/Popup.vue"
 
     export default {
         name: "discover-page",
         components: {
             Follow,
             HeaderVue,
+            Popup,
         },
         data() {
             return {
                 users: [],
-                // isFollowed: false,
+            
             }
         },
         methods: {
